@@ -1,12 +1,19 @@
-import css from "./SearchBar.module.css";
 import { IoIosSearch } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
+import React, { FormEvent } from "react";
+import css from "./SearchBar.module.css";
 
-export default function SearchBar({ onSubmit }) {
-  const onSubmitBar = (event) => {
+type SearchBarProps = {
+  onSubmit: (query: string) => void;
+};
+
+export const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+  const onSubmitBar = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = event.target;
-    const data = form.elements.topic.value;
+    const form = event.target as HTMLFormElement;
+    const data = form.elements.topic.value as HTMLFormElement;
+    console.log(data);
+
     if (data.trim() === "") {
       toast.error("Please, enter your request!");
       return;
@@ -34,4 +41,4 @@ export default function SearchBar({ onSubmit }) {
       </form>
     </header>
   );
-}
+};

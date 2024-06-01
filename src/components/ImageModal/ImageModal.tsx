@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { FcLike } from "react-icons/fc";
 import { GrInstagram } from "react-icons/gr";
 import { FaUserAlt } from "react-icons/fa";
+import React from "react";
 
 Modal.setAppElement("#root");
 
@@ -26,13 +27,21 @@ const customStyles = {
   },
 };
 
-export default function ImageModal({
+type ImageModalProps = {
+  imgModal: boolean;
+  onModalClose: () => void;
+  image: string;
+  imgLikes: number;
+  user: string;
+};
+
+export const ImageModal: React.FC<ImageModalProps> = ({
   imgModal,
   onModalClose,
   image,
   imgLikes,
   user,
-}) {
+}) => {
   return (
     <div>
       <Modal
@@ -62,4 +71,4 @@ export default function ImageModal({
       </Modal>
     </div>
   );
-}
+};

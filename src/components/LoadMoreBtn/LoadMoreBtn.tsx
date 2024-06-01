@@ -1,7 +1,12 @@
-import css from "./LoadMoreBtn.module.css";
 import { MdOutlineCloudDownload } from "react-icons/md";
+import React from "react";
+import css from "./LoadMoreBtn.module.css";
 
-export default function LoadMoreBtn({ onClick }) {
+type LoadMoreBtnProps = {
+  onClick: () => void;
+};
+
+export const LoadMoreBtn: React.FC<LoadMoreBtnProps> = ({ onClick }) => {
   return (
     <div className={css.container}>
       <button className={css.btn} onClick={onClick} type="button">
@@ -10,4 +15,4 @@ export default function LoadMoreBtn({ onClick }) {
       </button>
     </div>
   );
-}
+};

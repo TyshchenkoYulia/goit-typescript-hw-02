@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 import { fetchImages } from "./image-api";
+import { Images } from "./types";
 
-import SearchBar from "./components/SearchBar/SearchBar";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
-import Loader from "./components/Loader/Loader";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-import ImageModal from "./components/ImageModal/ImageModal";
-import NotFoundError from "./components/NotFoundError/NotFoundError";
+import { SearchBar } from "./components/SearchBar/SearchBar";
+import { ImageGallery } from "./components/ImageGallery/ImageGallery";
+import { Loader } from "./components/Loader/Loader";
+import { ErrorMessage } from "./components/ErrorMessage/ErrorMessage";
+import { LoadMoreBtn } from "./components/LoadMoreBtn/LoadMoreBtn";
+import { ImageModal } from "./components/ImageModal/ImageModal";
+import { NotFoundError } from "./components/NotFoundError/NotFoundError";
 
 export default function App() {
-  const [imgs, setImgs] = useState([]);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [notFoundError, setNotFoundError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [imgUrl, setImgsUrl] = useState([]);
+  const [imgs, setImgs] = useState<Images[]>([]);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [notFoundError, setNotFoundError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [modal, setModal] = useState<boolean>(false);
+  const [imgUrl, setImgsUrl] = useState<string[]>([]);
 
-  const [likes, setLikes] = useState(null);
-  const [userName, setUserName] = useState(null);
+  const [likes, setLikes] = useState<number | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
     if (!query) {
@@ -33,13 +34,15 @@ export default function App() {
         setLoading(true);
         setNotFoundError(false);
 
-        const newImgs = await fetchImages(page, query);
+        const newImgs: Images[] = await fetchImages(page, query);
 
         if (newImgs.length === 0) {
           setNotFoundError(true);
         }
 
-        setImgs((prevImages) => [...prevImages, ...newImgs]);
+        setImgs((prevImages) => {
+          return [...prevImages, ...newImgs];
+        });
       } catch (error) {
         setError(true);
       } finally {
@@ -49,24 +52,24 @@ export default function App() {
     getImages();
   }, [query, page]);
 
-  const handleSubmit = (query) => {
+  const handleSubmit = (query: string): void => {
     setQuery(query);
     setPage(1);
     setImgs([]);
   };
 
-  const handleLoadMore = () => {
+  const handleLoadMore = (): void => {
     setPage(page + 1);
   };
 
-  const openModal = (url, like, nameUser) => {
+  const openModal = (url: string, like: number, nameUser: string): void => {
     setImgsUrl(url);
     setLikes(like);
     setUserName(nameUser);
     toggle();
   };
 
-  const toggle = () => {
+  const toggle = (): void => {
     setModal(!modal);
   };
 

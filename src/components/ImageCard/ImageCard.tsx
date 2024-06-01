@@ -1,9 +1,16 @@
-import css from "./ImageCard.module.css";
+import React from "react";
 import { FcLike } from "react-icons/fc";
 import { GrInstagram } from "react-icons/gr";
 import { FaUserAlt } from "react-icons/fa";
+import { Images } from "../../types";
+import css from "./ImageCard.module.css";
 
-export default function ImageCard({
+type ImageCardProps = {
+  item: Images;
+  onImgClick: (url: string, like: number, nameUser: string) => void;
+};
+
+export const ImageCard: React.FC<ImageCardProps> = ({
   item: {
     alt_description,
     urls: { small, regular },
@@ -11,7 +18,7 @@ export default function ImageCard({
     user: { name },
   },
   onImgClick,
-}) {
+}) => {
   return (
     <div className={css.container}>
       <div className={css.imgWrapper}>
@@ -39,4 +46,4 @@ export default function ImageCard({
       </div>
     </div>
   );
-}
+};

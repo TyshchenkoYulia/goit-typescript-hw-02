@@ -1,7 +1,7 @@
 import css from "./NotFoundError.module.css";
 import { BiSolidErrorAlt } from "react-icons/bi";
 
-export default function NotFoundError() {
+export const NotFoundError = () => {
   return (
     <div className={css.container}>
       <h2 className={css.title}>
@@ -11,4 +11,4 @@ export default function NotFoundError() {
       <p className={css.error}>Please, try to make another request!</p>
     </div>
   );
-}
+};
