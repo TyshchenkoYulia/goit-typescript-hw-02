@@ -11,7 +11,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
   const onSubmitBar = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
-    const data = form.elements.topic.value as HTMLFormElement;
+    const data = form.elements.namedItem("topic") as HTMLFormElement;
 
     if (data.trim() === "") {
       toast.error("Please, enter your request!");
