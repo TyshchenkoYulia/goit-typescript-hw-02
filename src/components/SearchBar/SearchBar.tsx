@@ -13,11 +13,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
     const form = event.target as HTMLFormElement;
     const data = form.elements.namedItem("topic") as HTMLFormElement;
 
-    if (data.trim() === "") {
+    if (data.value.trim() === "") {
       toast.error("Please, enter your request!");
       return;
     }
-    onSubmit(data.trim());
+    onSubmit(data.value.trim());
     form.reset();
   };
 
