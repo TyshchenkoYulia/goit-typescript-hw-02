@@ -18,7 +18,7 @@ export default function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [modal, setModal] = useState<boolean>(false);
-  const [imgUrl, setImgsUrl] = useState<string[]>([]);
+  const [imgUrl, setImgsUrl] = useState<string>("");
 
   const [likes, setLikes] = useState<number | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
@@ -83,11 +83,11 @@ export default function App() {
       {imgs.length > 0 && !loading && <LoadMoreBtn onClick={handleLoadMore} />}
       {modal && (
         <ImageModal
-          image={imgUrl}
           imgModal={modal}
           item={imgs}
           onModalClose={toggle}
           imgLikes={likes}
+          image={imgUrl}
           user={userName}
         />
       )}
